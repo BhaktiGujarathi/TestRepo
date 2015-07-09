@@ -1,0 +1,6 @@
+Hello {!User.Name},
+        I {!Contact.Name}, want a leave from {!Leave__c.Start_Date__c} to {!Leave__c.End_Date__c}. Please Grant me permission.
+        Thank You.
+
+Regards,
+{!Contact.Name}

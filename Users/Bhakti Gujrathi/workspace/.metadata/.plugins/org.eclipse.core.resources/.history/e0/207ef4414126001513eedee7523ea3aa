@@ -1,0 +1,6 @@
+Hello {!Employee__c.OwnerFullName},
+    The Employee {!Employee__c.Name} is inactive. Please take a Note of it.
+Thank You.
+
+Regards,
+{!User.Name}

@@ -1,0 +1,3 @@
+trigger insertContact on Account (after insert) {
+
+}

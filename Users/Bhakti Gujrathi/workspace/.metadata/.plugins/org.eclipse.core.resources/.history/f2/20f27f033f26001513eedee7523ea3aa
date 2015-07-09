@@ -1,0 +1,6 @@
+Hello,
+
+Project {!Project_Details__c.Name} is to have a deadline is on {!Project_Details__c.End_Date__c} i.e., after 5 days Please take a serious note of it.
+
+Regards,
+{!User.Name}
