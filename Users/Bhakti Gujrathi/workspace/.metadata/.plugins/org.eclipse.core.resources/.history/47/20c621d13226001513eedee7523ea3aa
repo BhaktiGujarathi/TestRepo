@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Follow_up_alert</fullName>
+        <description>Follow up alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Followup_alert</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>DNC</fullName>
+        <description>DNC leads</description>
+        <field>Cluster__c</field>
+        <literalValue>DNC</literalValue>
+        <name>DNC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>DNC_update</fullName>
+        <description>Updates to DNC</description>
+        <field>RecordTypeId</field>
+        <lookupValue>DNC</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>DNC update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Landline</fullName>
+        <description>Landline leads</description>
+        <field>Cluster__c</field>
+        <literalValue>Landline</literalValue>
+        <name>Landline</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mobile</fullName>
+        <field>Cluster__c</field>
+        <literalValue>Landline</literalValue>
+        <name>Mobile</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NoNumber</fullName>
+        <description>Includes the Leads having no particular point of contact</description>
+        <field>Cluster__c</field>
+        <literalValue>No Number</literalValue>
+        <name>NoNumber</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_LandLine</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Landline</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update LandLine</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Mobile</fullName>
+        <description>Update record to Mobile</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Mobile</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Mobile</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_NoNumber</fullName>
+        <description>Updates NoNumber</description>
+        <field>RecordTypeId</field>
+        <lookupValue>No_number</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update NoNumber</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Follow up rule</fullName>
+        <actions>
+            <name>Follow_up_alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends an alert if the follow-up date has passed.</description>
+        <formula>Follow_up__c &lt;  TODAY()</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update DNC</fullName>
+        <actions>
+            <name>DNC_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.DoNotCall</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Updates Record to DNC</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update LandLine</fullName>
+        <actions>
+            <name>Update_LandLine</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the record to Landline</description>
+        <formula>IF ( NOT ( ISBLANK ( Landline__c  )), 
+AND ( DoNotCall == FALSE , ISBLANK(MobilePhone ) ) , 
+
+FALSE 
+
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Mobile</fullName>
+        <actions>
+            <name>Update_Mobile</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the record to Mobile</description>
+        <formula>IF ( NOT ( ISBLANK ( MobilePhone )), 
+AND ( DoNotCall == FALSE , ISBLANK( Landline__c  ) ) , 
+
+FALSE 
+
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update NoNumber</fullName>
+        <actions>
+            <name>Update_NoNumber</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the record to No Number.</description>
+        <formula>OR( ISBLANK( MobilePhone ), ISBLANK ( Landline__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <tasks>
+        <fullName>nonmbr</fullName>
+        <assignedTo>bhakti.gujrathi@eternussolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Lead.CreatedDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>nonmbr</subject>
+    </tasks>
+</Workflow>

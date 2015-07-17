@@ -1,0 +1,7 @@
+Dear {!Employee__c.Name}
+
+A new Project {!Project_Details__c.Name} has been created, and is assigned to you. Please check the task.
+
+
+Best Regards, 
+{!User.Name}
