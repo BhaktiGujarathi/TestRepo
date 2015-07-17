@@ -1,0 +1,74 @@
+trigger QueOnAccount on Account (before update) 
+	{
+	if(Trigger.isbefore)
+	{
+		if(Trigger.isupdate)
+		{
+			 System.debug('This is a trigger to be exeecuted before update(old)'+Trigger.old);
+/*This is a trigger to be exeecuted before update(old)(Account:{Id=00128000003vQ8FAAU, IsDeleted=false, 
+MasterRecordId=null, Name=Dickenson plc, Type=Customer - Direct, ParentId=null, BillingStreet=1301 Hoch Drive, 
+BillingCity=Lawrence, BillingState=KS, BillingPostalCode=66045, BillingCountry=USA, BillingLatitude=null, 
+BillingLongitude=null, ShippingStreet=1301 Hoch Drive, ShippingCity=Lawrence, ShippingState=KS, ShippingPostalCode=66045,
+ShippingCountry=USA, ShippingLatitude=null, ShippingLongitude=null, Phone=(785) 241-6200, Fax=(785) 241-6201, 
+AccountNumber=CC634267, Website=dickenson-consulting.com, PhotoUrl=null, Sic=6752, Industry=Media, AnnualRevenue=50000000,
+NumberOfEmployees=120, Ownership=Private, TickerSymbol=null, Description=null, Rating=null, Site=null, 
+OwnerId=00528000000xXvDAAU, CreatedDate=2015-06-24 13:47:44, CreatedById=00528000000xXvDAAU, LastModifiedDate=2015-07-15 11:55:16,
+LastModifiedById=00528000000xXvDAAU, SystemModstamp=2015-07-15 11:55:16, LastActivityDate=null, LastViewedDate=null, 
+LastReferencedDate=null, Jigsaw=null, JigsawCompanyId=null, CleanStatus=Pending, AccountSource=null, DunsNumber=null, 
+Tradestyle=null, NaicsCode=null, NaicsDesc=null, YearStarted=null, SicDesc=null, DandbCompanyId=null, CustomerPriority__c=Low,
+SLA__c=Bronze, Active__c=Yes, NumberofLocations__c=2, UpsellOpportunity__c=No, SLASerialNumber__c=7425, 
+SLAExpirationDate__c=2015-01-18 00:00:00, temp__c=null, Enrollment_Year__c=2010, Billing_State__c=null})
+*/
+			 System.debug('This is a trigger to be exeecuted before update(oldmap)'+Trigger.oldMap);
+/*This is a trigger to be exeecuted before update(oldmap){00128000003vQ8FAAU=Account:{Id=00128000003vQ8FAAU, 
+IsDeleted=false, MasterRecordId=null, Name=Dickenson plc, Type=Customer - Direct, ParentId=null, 
+BillingStreet=1301 Hoch Drive, BillingCity=Lawrence, BillingState=KS, BillingPostalCode=66045, BillingCountry=USA,
+ BillingLatitude=null, BillingLongitude=null, ShippingStreet=1301 Hoch Drive, ShippingCity=Lawrence, ShippingState=KS, 
+ ShippingPostalCode=66045, ShippingCountry=USA, ShippingLatitude=null, ShippingLongitude=null, Phone=(785) 241-6200, 
+ Fax=(785) 241-6201, AccountNumber=CC634267, Website=dickenson-consulting.com, PhotoUrl=null, Sic=6752, Industry=Media, 
+ AnnualRevenue=50000000, NumberOfEmployees=120, Ownership=Private, TickerSymbol=null, Description=null, Rating=null, 
+ Site=null, OwnerId=00528000000xXvDAAU, CreatedDate=2015-06-24 13:47:44, CreatedById=00528000000xXvDAAU, 
+ LastModifiedDate=2015-07-15 11:55:16, LastModifiedById=00528000000xXvDAAU, SystemModstamp=2015-07-15 11:55:16, 
+ LastActivityDate=null, LastViewedDate=null, LastReferencedDate=null, Jigsaw=null, JigsawCompanyId=null, CleanStatus=Pending, 
+ AccountSource=null, DunsNumber=null, Tradestyle=null, NaicsCode=null, NaicsDesc=null, YearStarted=null, SicDesc=null,
+  DandbCompanyId=null, CustomerPriority__c=Low, SLA__c=Bronze, Active__c=Yes, NumberofLocations__c=2, UpsellOpportunity__c=No, 
+  SLASerialNumber__c=7425, SLAExpirationDate__c=2015-01-18 00:00:00, temp__c=null, Enrollment_Year__c=2010, Billing_State__c=null}}
+*/
+			//for(Account a : Trigger.new)
+	        //{
+		       System.debug('This is a trigger to be exeecuted after update(new)'+Trigger.new);
+/*This is a trigger to be exeecuted after update(new)(Account:{Id=00128000003vQ8FAAU, IsDeleted=false, 
+MasterRecordId=null, Name=Dickenson plc, Type=Customer - Direct, ParentId=null, BillingStreet=1301 Hoch Drive, 
+BillingCity=Lawrence, BillingState=KS, BillingPostalCode=66045, BillingCountry=USA, BillingLatitude=null, 
+BillingLongitude=null, ShippingStreet=1301 Hoch Drive, ShippingCity=Lawrence, ShippingState=KS, ShippingPostalCode=66045, 
+ShippingCountry=USA, ShippingLatitude=null, ShippingLongitude=null, Phone=(785) 241-6200, Fax=(785) 241-6201,
+AccountNumber=CC634267, Website=dickenson-consulting.com, PhotoUrl=null, Sic=6752, Industry=Energy, AnnualRevenue=50000000,
+NumberOfEmployees=120, Ownership=Private, TickerSymbol=null, Description=null, Rating=null, Site=null, 
+OwnerId=00528000000xXvDAAU, CreatedDate=2015-06-24 13:47:44, CreatedById=00528000000xXvDAAU,LastModifiedDate=2015-07-15 11:55:16,
+LastModifiedById=00528000000xXvDAAU, SystemModstamp=2015-07-15 11:55:16, LastActivityDate=null, LastViewedDate=null,
+LastReferencedDate=null, Jigsaw=null, JigsawCompanyId=null, CleanStatus=Pending, AccountSource=null, DunsNumber=null,
+Tradestyle=null, NaicsCode=null, NaicsDesc=null, YearStarted=null, SicDesc=null, DandbCompanyId=null, CustomerPriority__c=Low,
+SLA__c=Bronze, Active__c=Yes, NumberofLocations__c=2, UpsellOpportunity__c=No, SLASerialNumber__c=7425,
+SLAExpirationDate__c=2015-01-18 00:00:00, temp__c=null, Enrollment_Year__c=2010, Billing_State__c=null})
+*/
+		        System.debug('This is a trigger to be exeecuted after update(newmap)'+Trigger.newMap);
+/*This is a trigger to be exeecuted after update(newmap){00128000003vQ8FAAU=Account:{Id=00128000003vQ8FAAU, IsDeleted=false,
+MasterRecordId=null, Name=Dickenson plc, Type=Customer - Direct, ParentId=null, BillingStreet=1301 Hoch Drive, BillingCity=Lawrence,
+ BillingState=KS, BillingPostalCode=66045, BillingCountry=USA, BillingLatitude=null, BillingLongitude=null, 
+ ShippingStreet=1301 Hoch Drive, ShippingCity=Lawrence, ShippingState=KS, ShippingPostalCode=66045, ShippingCountry=USA, 
+ ShippingLatitude=null, ShippingLongitude=null, Phone=(785) 241-6200, Fax=(785) 241-6201, AccountNumber=CC634267, 
+ Website=dickenson-consulting.com, PhotoUrl=null, Sic=6752, Industry=Energy, AnnualRevenue=50000000, NumberOfEmployees=120, 
+ Ownership=Private, TickerSymbol=null, Description=null, Rating=null, Site=null, OwnerId=00528000000xXvDAAU, 
+ CreatedDate=2015-06-24 13:47:44, CreatedById=00528000000xXvDAAU, LastModifiedDate=2015-07-15 11:55:16, 
+ LastModifiedById=00528000000xXvDAAU, SystemModstamp=2015-07-15 11:55:16, LastActivityDate=null, LastViewedDate=null, 
+ LastReferencedDate=null, Jigsaw=null, JigsawCompanyId=null, CleanStatus=Pending, AccountSource=null, DunsNumber=null, 
+ Tradestyle=null, NaicsCode=null, NaicsDesc=null, YearStarted=null, SicDesc=null, DandbCompanyId=null, CustomerPriority__c=Low, 
+ SLA__c=Bronze, Active__c=Yes, NumberofLocations__c=2, UpsellOpportunity__c=No, SLASerialNumber__c=7425, 
+ SLAExpirationDate__c=2015-01-18 00:00:00,  temp__c=null, Enrollment_Year__c=2010, Billing_State__c=null}}
+*/
+          //  }
+			
+ 		}		
+	}
+}
+	

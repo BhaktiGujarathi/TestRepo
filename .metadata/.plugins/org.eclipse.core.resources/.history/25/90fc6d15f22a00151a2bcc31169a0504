@@ -1,0 +1,39 @@
+trigger QueOnAccount on Account (after update, before update) {
+	if(Trigger.isbefore)
+	{
+		if(Trigger.isupdate)
+		{
+			for(Account a : Trigger.new)
+	        {
+		        System.debug('This is a trigger to be exeecuted before update(old)'+Trigger.old);
+		        /*05:17:58.104 (104608742)|USER_DEBUG|[8]|DEBUG|This is a trigger to be exeecuted before update(old)(Account:{Id=00128000003vQ8GAAU, IsDeleted=false, MasterRecordId=null, Name=Grand Hotels &
+		         Resorts Ltd, Type=Customer - Direct, ParentId=null, BillingStreet=2334 N. Michigan Avenue, Suite 1500
+Chicago, IL 60601, USA, BillingCity=Chicago, BillingState=IL, BillingPostalCode=null, BillingCountry=null, BillingLatitude=null, 
+BillingLongitude=null, ShippingStreet=2334 N. Michigan Avenue, Suite 1500
+Chicago, IL 60601, USA, ShippingCity=null, ShippingState=null, ShippingPostalCode=null, ShippingCountry=null, 
+ShippingLatitude=null, ShippingLongitude=null, Phone=(312) 596-1000, Fax=(312) 596-1500, AccountNumber=CD439877, 
+Website=www.grandhotels.com, PhotoUrl=null, Sic=2268, Industry=Healthcare, AnnualRevenue=500000000, NumberOfEmployees=5600,
+ Ownership=Public, TickerSymbol=GHTL, Description=Chain of hotels and resorts across the US, UK, Eastern Europe, Japan, and SE Asia., Rating=Warm, Site=null, 
+ OwnerId=00528000000xXvDAAU, CreatedDate=2015-06-24 13:47:44, CreatedById=00528000000xXvDAAU, LastModifiedDate=2015-07-15 12:16:08, LastModifiedById=00528000000xXvDAAU, 
+ SystemModstamp=2015-07-15 12:16:08, LastActivityDate=null, LastViewedDate=null, LastReferencedDate=null, Jigsaw=null, JigsawCompanyId=null, CleanStatus=Pending, AccountSource=null, DunsNumber=null, 
+ Tradestyle=null, NaicsCode=null, NaicsDesc=null, YearStarted=null, SicDesc=null, DandbCompanyId=null, CustomerPriority__c=High, SLA__c=Gold, Active__c=Yes, NumberofLocations__c=57, UpsellOpportunity__c=Yes, 
+ SLASerialNumber__c=5572, SLAExpirationDate__c=2015-01-18 00:00:00, temp__c=null, Enrollment_Year__c=2010;2012, Billing_State__c=null})*/
+		        // [00128000003vQ8F]
+		        System.debug('This is a trigger to be exeecuted before update(oldmap)'+Trigger.oldMap);
+	        }
+			
+ 		}		
+	}
+	if(Trigger.isafter)
+	{
+		if(Trigger.isupdate)
+		{
+			for(Account a : Trigger.new)
+	        {
+		        System.debug('This is a trigger to be exeecuted after update(new)'+Trigger.new);
+		        System.debug('This is a trigger to be exeecuted after update(newmap)'+Trigger.newMap);
+	        }
+			
+ 		}		
+	}
+}

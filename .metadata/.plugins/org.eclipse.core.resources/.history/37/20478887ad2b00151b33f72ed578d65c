@@ -1,0 +1,23 @@
+public with sharing class DefaultTriggerHandler 
+{
+   public static void Triggerque1(List<account> Alist)
+   {
+   	  // List<account> AClist = new List<account>();
+   	  account accClone = new account();
+   	   for(account a :  Alist)
+   	   {
+   	   	  accClone = a.clone(true, true,true,true);
+   	   	   //AClist.add(accClone);
+   	   } 
+   	   
+   	   try
+   	   { 
+   	       insert accClone;
+   	       System.debug('this is clone of account');
+   	   } 	
+   	   catch(DMLException e)
+   	   {
+   	   	    System.debug(e.getmessage());
+   	   } 
+   }
+}

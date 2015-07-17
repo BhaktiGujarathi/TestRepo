@@ -1,0 +1,48 @@
+trigger Que2OnAccount on Account (after delete, after insert, after undelete, 
+after update, before delete, before insert, before update) 
+{ 
+	if(Trigger.isbefore && Trigger.isupdate)
+		{
+			 System.debug('This is a trigger to be exeecuted before update(old)'+Trigger.old);
+			 System.debug('This is a trigger to be exeecuted before update(oldmap)'+Trigger.oldMap);
+             System.debug('This is a trigger to be exeecuted before update(new)'+Trigger.new);
+             System.debug('This is a trigger to be exeecuted before update(newmap)'+Trigger.newMap);
+	}
+	if(Trigger.isafter && Trigger.isupdate)
+		{
+			 System.debug('This is a trigger to be exeecuted after update(old)'+Trigger.old);
+			 System.debug('This is a trigger to be exeecuted after update(oldmap)'+Trigger.oldMap);
+             System.debug('This is a trigger to be exeecuted after update(new)'+Trigger.new);
+             System.debug('This is a trigger to be exeecuted after update(newmap)'+Trigger.newMap);
+	}
+	//if(Trigger.isbefore)
+	//{
+	//	if(Trigger.isinsert)
+	//	{
+	//	     
+	//	}
+	//}
+	if(Trigger.isafter && Trigger.isinsert)
+		{
+			 System.debug('This is a trigger to be exeecuted after insert(new)'+Trigger.new);
+             System.debug('This is a trigger to be exeecuted after insert(newmap)'+Trigger.newMap);
+		}
+	if(Trigger.isbefore && Trigger.isdelete)
+		{
+			 System.debug('This is a trigger to be exeecuted before delete(old)'+Trigger.old);
+			 System.debug('This is a trigger to be exeecuted before delete(oldmap)'+Trigger.oldMap);
+             System.debug('This is a trigger to be exeecuted before delete(new)'+Trigger.new);
+             System.debug('This is a trigger to be exeecuted before delete(newmap)'+Trigger.newMap);
+		}
+	if(Trigger.isafter && Trigger.isdelete)
+		{
+			 System.debug('This is a trigger to be exeecuted after delete(old)'+Trigger.old);
+			 System.debug('This is a trigger to be exeecuted after delete(oldmap)'+Trigger.oldMap);
+        }
+	if(Trigger.isafter && Trigger.isundelete)
+		{
+             System.debug('This is a trigger to be exeecuted after undelete(new)'+Trigger.new);
+             System.debug('This is a trigger to be exeecuted after undelete(newmap)'+Trigger.newMap);
+		}
+
+}

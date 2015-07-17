@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email for new project creation and assignment</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Assigned To</name>
+    <style>none</style>
+    <subject>Project {!Project_Details__c.Name} assignment.</subject>
+    <type>text</type>
+</EmailTemplate>

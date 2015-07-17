@@ -1,0 +1,32 @@
+public with sharing class DefaultTriggerHandler 
+{ 
+	public static boolean Stop=true; 
+    public static void Triggerque1(List<account> Alist)
+   {
+	   account accClone = new account();
+   	   for(account a: Alist)
+   	   {  	   	  
+   	   	 accClone = a.clone(false, true,true,true);
+   	   }
+   	   if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert accClone;
+   	   }
+   }
+   public static void DuplicateCheckOnContact(List<Contact> ContactList)
+   {
+   	   list<Contact> clist=new list<Contact>();
+   	  
+   	   for(contact c : ContactList)
+   	   {
+   	   	   clist.add(c);
+   	   }
+   	   if(Stop) 
+   	   { 
+   	   	    Stop = false;
+   	   	    insert con;
+   	   }
+   }
+}  	 
+   	   	

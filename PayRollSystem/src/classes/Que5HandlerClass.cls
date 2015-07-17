@@ -1,0 +1,55 @@
+public with sharing class Que5HandlerClass {
+	public static boolean stop = true;
+	public static void createCase(List<EFT_Transaction_Status__c> EFTList){
+		map<id,SalesHeader__c> SalesHeaderMap = new map<id,SalesHeader__c>();
+		Set<id> SalesHeaderIds = new Set<id>();
+		for(EFT_Transaction_Status__c Tset : EFTList)
+		{
+			 SalesHeaderIds.add(Tset.SalesHeader__c);
+		}
+		List<SalesHeader__c> SalesHeaderRecordList = [SELECT id, Status__c, name,Account__c, Contact__c, (Select Id From EFT_Transaction_Status__r)
+		                                              FROM SalesHeader__c
+		                                              WHERE id IN: SalesHeaderIds];
+		//List<SalesHeader__c> ListOfSalesEFT= [Select id, (Select Id From EFT_Transaction_Status__r) From SalesHeader__c s];
+		for(SalesHeader__c salesObject :SalesHeaderRecordList)
+		{
+			for(EFT_Transaction_Status__c eftObject :salesObject.EFT_Transaction_Status__r)
+			 {
+			  SalesHeaderMap.put(eftObject.id, salesObject);
+			 }
+		}
+		List<Case> c1 =new List<Case>();  	 
+   	    for(EFT_Transaction_Status__c T : EFTList)
+        { 
+        	SalesHeader__c ObjectToHoldSales = SalesHeaderMap.get(T.id);
+    	    if(T.Method__c == 'Credit Card Address Verify' && T.Transaction_Status__c == 'Declined' && ObjectToHoldSales.Status__c == 'Open' )
+    	    {
+    	  
+    	               Case cs= new Case();
+    	               cs.AccountId = ObjectToHoldSales.Account__c;
+    	               cs.ContactId = ObjectToHoldSales.Contact__c;    	
+    	              // cs.RecordType.Name = 'Assignment';
+    	               cs.Origin = 'Internal';
+    	               cs.OwnerId = '00G28000000ZPDu'; 
+    	               cs.Reason = 'Address Did Not Verify'; 
+    	               cs.Priority = 'High';
+    	               cs.Status = 'New'; 
+    	               cs.Subject= cs.Account.Name + ' ' + cs.Type;
+    	               cs.Open_Sales_Order__c= ObjectToHoldSales.Name;
+    	               cs.Transaction_Status__c=T.Transaction_Status__c;
+    	               cs.Sales_Order_Name__c= ObjectToHoldSales.Id;
+    	               c1.add(cs); 
+    	               //System.debug(trigger.new); 	
+    	          }
+    	       }
+    	     
+    	    
+        
+        if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert c1;
+   	   }
+    }
+	}
+

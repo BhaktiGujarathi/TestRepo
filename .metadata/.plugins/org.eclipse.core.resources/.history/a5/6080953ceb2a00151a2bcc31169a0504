@@ -1,0 +1,27 @@
+trigger QueOnAccount on Account (after update, before update) {
+	if(Trigger.isbefore)
+	{
+		if(Trigger.isupdate)
+		{
+			for(Account a : Trigger.new)
+	        {
+		        System.debug('This is a trigger to be exeecuted before update'+Trigger.old);
+		        // [00128000003vQ8F]
+		        System.debug('This is a trigger to be exeecuted before update'+Trigger.oldmap);
+	        }
+			
+ 		}		
+	}
+	if(Trigger.isafter)
+	{
+		if(Trigger.isupdate)
+		{
+			for(Account a : Trigger.new)
+	        {
+		        System.debug('This is a trigger to be exeecuted after update'+Trigger.new);
+		        System.debug('This is a trigger to be exeecuted after update'+Trigger.newmap);
+	        }
+			
+ 		}		
+	}
+}

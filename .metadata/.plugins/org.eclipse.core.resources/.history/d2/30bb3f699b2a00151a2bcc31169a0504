@@ -1,0 +1,193 @@
+public with sharing class Day10Assignment {
+	
+    List<Contact> conList =[Select Id, Name From Contact Limit 50];
+    public void question1(){
+        System.debug(conList);
+    }
+        public void question2(){
+        List<User> userList =[ Select Id, Name From User Where IsActive = TRUE ];
+        System.debug(userList);
+        Map<Id, User> userMap= new Map<Id, User>();
+        for(User u: userList){
+            userMap.put(u.id, u);
+        
+             }
+        }
+    public void question3(){
+        Map<Id, Account> Accountmap =  new Map<Id, Account>();
+       // System.debug(Accountmap);
+         Map< String,Id> Accountmap2 =  new Map< String,Id>();
+        //System.debug(Accountmap2);
+    }
+    public void question4(){
+         List<Account> L1 = [Select Id, Name From Account Where Enrollment_Year__c includes ('2010') ];
+        System.debug(L1);
+         List<Account> L2 = [Select Id, Name From Account Where Enrollment_Year__c includes ('2013','2014') ];
+        System.debug(L2);
+    }
+     public void question5(){
+            
+        List<Account> L3 = [select name , Billing_State__c from Account  where Billing_State__c  not in ('Maharashtra', 'Kerala') ORDER by Billing_State__c DESC nulls last limit 1000];
+         System.debug(L3);
+        }
+    public void question6(){
+      list<Opportunity> l4= [select name,id, amount  from Opportunity  where amount > 10000 ORDER by  CreatedDate limit 100 offset 2 all rows];
+       System.debug(l4);  
+       
+    }
+    /*public void question7(){
+      AggregateResult[] groupedResults = [Select SUM(Amount) From Opportunity Having CloseDate = This_Fiscal_Year];
+     for (AggregateResult ar : groupedResults)  {
+      //System.debug('Campaign ID' + ar.get('CampaignId'));
+      System.debug('Average amount' + ar.get('expr0'));
+
+     }  
+}*/
+public void aggr2(){
+    AggregateResult[] leadresults = [SELECT COUNT_DISTINCT(Name) , LeadSource
+                                      FROM Lead
+                                      Group By LeadSource
+                                      Having COUNT_DISTINCT(Name) > 10]; 
+    for(AggregateResult ar1 : leadresults)
+    {
+    	System.debug(ar1);
+    }
+}
+public void ChildParent1(){
+    List<Contact> Lcon =[SELECT id, Name, AccountId
+                         FROM Contact
+                         WHERE Account.Industry ='Media' AND Account.Active__c ='yes' LIMIT 10];  
+    System.debug(Lcon);
+}
+      public void ChildParent2(){
+    List<C_Object__c> CList = [SELECT id, A_Object__r.id, B_Object__r.id
+                                FROM C_Object__c
+                                WHERE Name ='john'];
+    for(C_Object__c CObj : Clist){
+        System.debug(CObj);
+    }
+} 
+  // not displaying the records of child.
+  
+	public void ParentChild1()   
+	{
+          
+       /* List<Account> accountList = [SELECT Id, Name 
+                                      FROM Account 
+                                      WHERE Id IN (SELECT AccountId FROM Contact WHERE Name LIKE '%John%')];
+         for(Account a : accountList)
+             System.debug(a);  */
+           list<Account> myList = [select a.Name,a.Id,
+                                          (select Name 
+                                           from Contacts 
+                                           where Name Like '%John%') 
+                                   From Account a where a.Id IN
+                                           (Select AccountId
+                                            from Contact
+                                            where Name Like '%john%') 
+                 ];
+                 for(Account acn:myList)
+                 {
+                       system.debug(acn);
+                        for(contact con: acn.contacts)
+                        {
+                             system.debug(con);
+                        }
+                 }
+    	
+     }
+   
+   public void ParentChild2()
+   { 
+   	list<Account> myList = [Select a.Name, a.Id, (Select Id, StageName 
+   	                                              From Opportunities)
+   	                        From Account a 
+   	                        where  a.id IN (Select AccountId
+                                            from Opportunity
+                                            where StageName Like 'Closed Won')];
+     for(Account acn:myList)
+                 {
+                       system.debug(acn);
+                        for(Opportunity opp: acn.Opportunities)
+                        {
+                             system.debug(opp);
+                        }
+                 }
+    	
+   }
+ 
+     public void ParentChild3()   
+	{
+		list<Account> myList = [Select a.Name, a.Id, (Select Id, StageName 
+   	                                              From Opportunities)
+   	                        From Account a 
+   	                        where  a.id IN (Select AccountId
+                                            from Opportunity
+                                            where StageName Like 'Closed Won')];
+    	
+    	for(Account acn:myList)
+                 {
+                       system.debug(acn);
+                        for(contact con: acn.contacts)
+                        {
+                             system.debug(con);
+                        }
+                 }
+    	
+     }
+  public void SOSLquery()
+  {
+     List<List<SObject>> searchList = [FIND '*Bhakti*' IN ALL FIELDS RETURNING Account , Contact, User, Lead];
+     Account [] accountslist = ((List<Account>)searchList[0]);
+     Contact [] contactslist = ((List<Contact>)searchList[1]);
+     User [] userslist = ((List<User>)searchList[2]);
+     Lead [] leadslist = ((List<Lead>)searchList[3]);
+     for(sObject s :accountslist)
+     {    
+     	   System.debug('The related accounts are: ' +s);
+     }
+     for(sObject s :contactslist)
+     {    
+     	   System.debug('The related contacts are: ' +s);
+     }
+     for(sObject s :userslist)
+     {    
+     	   System.debug('The related users are: ' +s);
+     }
+     for(sObject s :leadslist)
+     {    
+     	   System.debug('The related leads are: ' +s);
+     }
+  }
+  public void DML2delete()
+  {
+  	 List<Account> accountList= [Select id, name from Account Where Active__c ='Yes' And CreatedDate = LAST_90_DAYS];
+  	  for(Account a: [Select id, name from Account Where Active__c ='Yes' And CreatedDate = LAST_90_DAYS])
+  	  {  
+  	  	   System.debug(a);
+  	  }
+  	  Delete accountList;
+  }
+  public void DML2Insert()
+  {   List<Lead> Llist100 = new List<Lead>(); 
+  	  for(Integer i=0;i<100;i++)
+  	  { 
+  	  	   Lead leadL = new Lead(LastName='Test100'+i, Company='Test1 Inc.',
+                            Status='Status changed', Unique_Field__c= 'abc'+i);
+  	  	  Llist100.add(leadL);
+  	  }
+  	  try
+  	  {
+  	      insert Llist100;
+  	  }
+  	  catch(DMLException e)
+  	  { 
+  	  	  Log__c error =new Log__c( Error__c = e.getMessage());
+  	  	  insert error;
+  	  	  System.debug('The following exception has occurred: ' + e.getMessage());
+  	  	  
+  	  }
+  	  
+  }
+     
+}

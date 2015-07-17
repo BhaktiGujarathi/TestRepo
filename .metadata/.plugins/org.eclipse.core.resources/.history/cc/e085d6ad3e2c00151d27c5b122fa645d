@@ -1,0 +1,8 @@
+public with sharing class Que5HandlerClass {
+	
+	SELECT [Method__c,Transaction_Status__c, Name, id From EFT_Transaction_Status__c 
+	Where EFT_Transaction_Status__c.Method_Name__c = 'Credit Card Address Verify' 
+	AND EFT_Transaction_Status__c.Transaction_Status__c= 'Declined' 
+	AND EFT_Transaction_Status__c.SalesHeader__r.Status__c = 'Open'] 
+
+}

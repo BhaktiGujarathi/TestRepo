@@ -1,0 +1,27 @@
+public with sharing class DefaultTriggerHandler 
+{
+   public static void Triggerque1(List<account> Alist)
+   {
+   	  //List<account> AClist = new account[5];
+   	  account accClone = new account();
+   	   for(account a :  Alist)
+   	   {
+   	   	  if(integer i<5)
+   	   	      accClone = a.clone(false, true,true,true);
+   	   	   else
+   	   	      System.debug('error cannot create a further clone.');
+   	   	  
+   	   	  // AClist.add(accClone);
+   	   } 
+   	   
+   	  // try
+   	   //{ 
+   	       insert accClone;
+   	       System.debug('this is clone of account' +accClone);
+   	   //} 	
+   	   //catch(DMLException e)
+   	   //{
+   	   	 //   System.debug(e.getmessage());
+   	   //} 
+   }
+}

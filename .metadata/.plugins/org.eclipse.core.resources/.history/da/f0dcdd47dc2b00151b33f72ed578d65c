@@ -1,0 +1,5 @@
+Hello,
+{!Opportunity.Name} is spotted to be greater than 50k  i.e., {!Opportunity.Name}so please take a note of it.
+
+Regards,
+{!Opportunity.OwnerFullName}

@@ -1,0 +1,57 @@
+public with sharing class DefaultTriggerHandler 
+{ 
+	public static boolean Stop=true; 
+    public static void Triggerque1(List<account> Alist)
+   {
+	   account accClone = new account();
+   	   for(account a: Alist)
+   	   {  	   	  
+   	   	 accClone = a.clone(false, true,true,true);
+   	   }
+   	   if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert accClone;
+   	   }
+   }
+  /* public static void DuplicateCheckOnContact(List<Contact> ContactList)
+   {
+   	   list<Contact> clist=new list<Contact>();
+   	   list<Contact> clist1=[Select c.HomePhone, c.Email From Contact c];
+   	  
+   	   for(contact c : ContactList)
+   	   {
+   	   	   
+   	   	   clist.add(c);
+   	   }
+   	   if(Stop) 
+   	   { 
+   	   	    Stop = false;
+   	   	    insert c;
+   	   }
+   }*/
+   public void CreateCase(List<EFT_Transaction_Status__c> TList)
+   {
+   	    for(EFT_Transaction_Status__c T : TList)
+        { 
+    	    if(T.Method__c == 'Credit Card Address Verify' )
+    	    {
+    	       if(T.Transaction_Status__c == 'Declined')
+    	       {
+    	          if(T.SalesHeader__r.Status__c == 'Open' )	
+    	          {
+    	               Case cs= new Case();
+    	               cs.AccountId = T.SalesHeader__r.Account__c;
+    	               cs.AccountId = T.SalesHeader__r.Contact__c;    	
+    	               cs.RecordType.Name = 'Assignment';
+    	               cs.Origin = 'Internal'; 
+    	               cs.OwnerId = '00G28000000ZPDu'; 
+    	               cs.AccountId = T.SalesHeader__r.Contact__c;      	    	
+    	          }
+    	       }
+    	     
+    	    }
+        }
+    }
+}  	 
+   	   	

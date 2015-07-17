@@ -1,0 +1,7 @@
+trigger CreateCaseOnInsertionOfTransaction on EFT_Transaction_Status__c (after insert) {
+    if(Trigger.isafter && Trigger.isinsert)
+    { 
+    	 DefaultTriggerHandler.CreateCase(trigger.new);
+    	 
+    }
+}

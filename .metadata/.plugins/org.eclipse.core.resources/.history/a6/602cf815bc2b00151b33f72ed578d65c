@@ -1,0 +1,20 @@
+public with sharing class DefaultTriggerHandler 
+{ 
+	public static boolean Stop=true; 
+    public static void Triggerque1(List<account> Alist)
+   {
+	//account a= new account();
+   	  //List<account> AClist = new account[5];
+   	  account accClone = new account();
+   	   for(account a: Alist)
+   	   {  	   	  
+   	   	 accClone = a.clone(false, true,true,true);
+   	   }
+   	   if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert accClone;
+   	   }
+   }
+}  	 
+   	   	

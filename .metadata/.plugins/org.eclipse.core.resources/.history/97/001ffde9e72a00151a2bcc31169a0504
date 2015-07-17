@@ -1,0 +1,3 @@
+trigger QueOnAccount on A_Object__c (after update, before update) {
+
+}

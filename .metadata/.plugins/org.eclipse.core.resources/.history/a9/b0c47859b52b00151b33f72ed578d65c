@@ -1,0 +1,15 @@
+public with sharing class DefaultTriggerHandler 
+{
+   public static void Triggerque1(List<account> Alist)
+   {
+      account a =Alist.get();
+      if(a.id!= NULL)
+      {
+       account accClone = a.clone(false, true,true,true);
+       insert accClone;
+      }
+      else
+       System.debug('error!!!');	
+    	
+   }
+   	 

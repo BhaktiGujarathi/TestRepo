@@ -1,0 +1,19 @@
+trigger Que3OnAccount on Account (after insert) 
+{
+    
+    if(Trigger.isAfter && Trigger.isInsert)
+    { 
+    Set unique= new set();
+	if(!StopRecursion.Stop)
+	{
+		for(Account a: Alist)
+		{
+			 unique.add(a.uniqueField__c);
+		}
+	}
+	if(!unique.isEmpty())
+	{ 
+		 DefaultTriggerHandler.Triggerque1(unique);
+	}
+    }
+}

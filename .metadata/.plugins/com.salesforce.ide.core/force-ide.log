@@ -1,0 +1,99 @@
+ WARN [2015-07-17 14:13:55,461] (BaseRetryAspect.java:isConnectionExceptionRetryable:153) - Connection evaluation deemed exception not retry-able:
+ MalformedQueryFault: 
+                    WHERE id IN: SalesHeaderIds
+                              ^
+ERROR at Row:3:Column:59
+Bind variables only allowed in Apex code
+ WARN [2015-07-17 14:13:55,471] (BaseRetryAspect.java:isOperationsExceptionRetryable:182) - Operataions evaluation deemed exception not retry-able:
+ MalformedQueryFault: 
+                    WHERE id IN: SalesHeaderIds
+                              ^
+ERROR at Row:3:Column:59
+Bind variables only allowed in Apex code
+ERROR [2015-07-17 14:13:55,481] (SchemaBrowser.java:run:248) - com.salesforce.ide.core.remote.ForceConnectionException: 
+                    WHERE id IN: SalesHeaderIds
+                              ^
+ERROR at Row:3:Column:59
+Bind variables only allowed in Apex code
+ERROR [2015-07-17 14:13:55,511] (SchemaBrowser.java:mouseUp:204) - Unable to open Schema Browser
+[MalformedQueryFault [ApiQueryFault [ApiFault  exceptionCode='MALFORMED_QUERY'
+ exceptionMessage='
+                    WHERE id IN: SalesHeaderIds
+                              ^
+ERROR at Row:3:Column:59
+Bind variables only allowed in Apex code'
+ upgradeURL='null'
+ upgradeMessage='null'
+]
+ row='3'
+ column='59'
+]
+]
+
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at com.sforce.ws.bind.TypeMapper.readSingle(TypeMapper.java:650)
+	at com.sforce.ws.bind.TypeMapper.readObject(TypeMapper.java:527)
+	at com.sforce.ws.transport.SoapConnection.parseDetail(SoapConnection.java:230)
+	at com.sforce.ws.transport.SoapConnection.createException(SoapConnection.java:204)
+	at com.sforce.ws.transport.SoapConnection.receive(SoapConnection.java:150)
+	at com.sforce.ws.transport.SoapConnection.send(SoapConnection.java:99)
+	at com.sforce.soap.partner.wsc.PartnerConnection.query(PartnerConnection.java:1266)
+	at com.salesforce.ide.core.remote.Connection.query(Connection.java:848)
+	at com.salesforce.ide.core.remote.Connection$$FastClassByCGLIB$$8e61a81d.invoke(<generated>)
+	at net.sf.cglib.proxy.MethodProxy.invoke(MethodProxy.java:149)
+	at org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint(Cglib2AopProxy.java:700)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at com.salesforce.ide.core.internal.aspects.CrudOperationsRetryAspect.crudOperationRetry(CrudOperationsRetryAspect.java:35)
+	at sun.reflect.GeneratedMethodAccessor202.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:50)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:90)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept(Cglib2AopProxy.java:635)
+	at com.salesforce.ide.core.remote.Connection$$EnhancerByCGLIB$$1af6975d.query(<generated>)
+	at com.salesforce.ide.schemabrowser.ui.SchemaBrowser$1.run(SchemaBrowser.java:234)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:464)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:372)
+	at org.eclipse.jface.dialogs.ProgressMonitorDialog.run(ProgressMonitorDialog.java:507)
+	at org.eclipse.ui.internal.progress.ProgressMonitorJobsDialog.run(ProgressMonitorJobsDialog.java:275)
+	at org.eclipse.ui.internal.progress.ProgressManager.run(ProgressManager.java:1162)
+	at com.salesforce.ide.schemabrowser.ui.SchemaBrowser$2.mouseUp(SchemaBrowser.java:202)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:220)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4170)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3759)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1113)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:997)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:140)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:611)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:567)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:354)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:181)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1426)
+ERROR [2015-07-17 14:31:51,648] (MetadataOperationsRetryAspect.java:metadataOperationsRetry:34) - ForceRemoteException occurred while attempting to perform a metadata operation

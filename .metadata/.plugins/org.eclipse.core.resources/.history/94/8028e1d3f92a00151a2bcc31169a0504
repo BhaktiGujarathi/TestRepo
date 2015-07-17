@@ -1,0 +1,6 @@
+Dear {!Project_Details__c.Role__c},
+
+The Opportunity needs approval.
+
+Thanks,
+{!User.Name}

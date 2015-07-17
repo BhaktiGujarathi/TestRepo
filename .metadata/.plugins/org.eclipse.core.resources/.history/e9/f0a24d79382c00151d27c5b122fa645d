@@ -1,0 +1,67 @@
+public with sharing class DefaultTriggerHandler 
+{ 
+	public static boolean Stop=true; 
+    /*public static void Triggerque1(List<account> Alist)
+   {
+	   account accClone = new account();
+   	   for(account a: Alist)
+   	   {  	   	  
+   	   	 accClone = a.clone(false, true,true,true);
+   	   }
+   	   if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert accClone;
+   	   }
+   }*/
+  /* public static void DuplicateCheckOnContact(List<Contact> ContactList)
+   {
+   	   list<Contact> clist=new list<Contact>();
+   	   list<Contact> clist1=[Select c.HomePhone, c.Email From Contact c];
+   	  
+   	   for(contact c : ContactList)
+   	   {
+   	   	   
+   	   	   clist.add(c);
+   	   }
+   	   if(Stop) 
+   	   { 
+   	   	    Stop = false;
+   	   	    insert c;
+   	   }
+   }*/
+   public static void CreateCase(List<EFT_Transaction_Status__c> TList)
+   {
+   	    List<Case> c1 =new List<Case>();  	 
+   	    for(EFT_Transaction_Status__c T : [select Method__c, Transaction_Status__c,SalesHeader__c.Status__c from TList where Method__c = 'Credit Card Address Verify' and Transaction_Status__c = 'Declined' and SalesHeader__c.Status__c = 'Open'])
+        { 
+    	    if(T.Method__c == 'Credit Card Address Verify' && T.Transaction_Status__c == 'Declined' && T.SalesHeader__r.Status__c == 'Open' )
+    	    {
+    	  
+    	               Case cs= new Case();
+    	               cs.AccountId = T.SalesHeader__r.Account__c;
+    	               cs.ContactId = T.SalesHeader__r.Contact__c;    	
+    	               cs.RecordType.Name = 'Assignment';
+    	               cs.Origin = 'Internal'; 
+    	               cs.OwnerId = '00G28000000ZPDu'; 
+    	               cs.Reason = 'Address Did Not Verify'; 
+    	               cs.Priority = 'High';
+    	               cs.Status = 'New'; 
+    	               cs.Subject= cs.Account.Name + ' ' + cs.Type;
+    	               cs.Open_Sales_Order__c= T.SalesHeader__r.Name;
+    	               cs.Transaction_Status__c=T.Transaction_Status__c;
+    	               cs.Sales_Order_Name__c= T.SalesHeader__r.Id;
+    	               c1.add(cs); 
+    	               System.debug(trigger.new); 	
+    	          }
+    	       }
+    	     
+    	    
+        
+        if(Stop) 
+   	   {
+   	   	 Stop=false;
+   	   	 insert c1;
+   	   }
+    }
+}

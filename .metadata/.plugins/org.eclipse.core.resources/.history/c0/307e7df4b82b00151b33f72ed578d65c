@@ -1,0 +1,30 @@
+public with sharing class DefaultTriggerHandler 
+{ public static boolean firstRun = true;
+   public static void Triggerque1(List<account> Alist)
+   {
+      account a= new account();
+   	  //List<account> AClist = new account[5];
+   	  account accClone = new account();
+   	   for(integer i=0;i<5;i++)
+   	   {
+   	   	  
+   	   	 accClone = a.clone(false, true,true,true);
+   	   	 
+   	   	 
+   	   	  // AClist.add(accClone);
+   	   } 
+   	   
+   	  // try
+   	   //{ if(firstRun)
+ if
+ {
+  firstRun=false;
+   	       insert accClone;
+   	       System.debug('this is clone of account' +accClone);
+ }//} 	
+   	   //catch(DMLException e)
+   	   //{
+   	   	 //   System.debug(e.getmessage());
+   	   //} 
+   }
+}  	 

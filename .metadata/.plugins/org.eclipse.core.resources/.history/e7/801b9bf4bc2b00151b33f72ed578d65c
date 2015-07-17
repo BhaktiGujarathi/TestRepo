@@ -1,0 +1,3 @@
+trigger Que4OnContacts on Contact (before insert) {
+
+}

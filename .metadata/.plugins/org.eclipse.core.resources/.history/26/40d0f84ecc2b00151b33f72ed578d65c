@@ -1,0 +1,10 @@
+trigger CreateCaseOnInsertionOfTransaction on EFT_Transaction_Status__c (after insert) 
+{
+    if(Trigger.isafter && Trigger.isinsert)
+    { 
+    	 if(EFT_Transaction_Status__c.Method__c == 'Credit Card Address Verify' && EFT_Transaction_Status__c.Transaction_Status__c == 'Declined')
+    	 {
+    	 	
+    	 }
+    }
+}

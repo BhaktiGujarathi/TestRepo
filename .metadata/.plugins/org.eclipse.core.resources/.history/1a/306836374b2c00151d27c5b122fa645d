@@ -1,0 +1,50 @@
+public with sharing class Que5HandlerClass {
+	public static boolean stopFlag = true;
+	public static void createCase(List<EFT_Transaction_Status__c> EFTList){
+	List<Case> CList =new List<Case>();
+	//List<EFT_Transaction_Status__c> TList =[SELECT Method__c,Transaction_Status__c, Name, id From EFT_Transaction_Status__c 
+	//Where EFT_Transaction_Status__c.Method__c = 'Credit Card Address Verify' 
+	//AND EFT_Transaction_Status__c.Transaction_Status__c= 'Declined' 
+	//AND EFT_Transaction_Status__c.SalesHeader__r.Status__c = 'Open'] ;
+	
+	for(EFT_Transaction_Status__c T : EFTlist) 
+	{
+		 System.debug(T);
+	     if(T.Method__c == 'Credit Card Address Verify')
+	     {
+	     	System.debug(T.Method__c);
+	         if(T.Transaction_Status__c== 'Declined')
+	         {
+	         	System.debug(T.Transaction_Status__c);
+	         	System.debug('This is the thing ***** '+T.SalesHeader__r.Status__c);
+                 if(T.SalesHeader__r.Status__c == 'Open')
+	             {
+	     	           System.debug(T.Method__c+' '+T.Transaction_Status__c+' '+T.SalesHeader__r.Status__c);
+		               Case cs= new Case();
+		               System.debug(cs);
+		               cs.AccountId = T.SalesHeader__r.Account__c;
+    	               cs.ContactId = T.SalesHeader__r.Contact__c;    	
+    	               cs.RecordType.Name = 'Assignment';
+    	               cs.Origin = 'Internal'; 
+    	               cs.OwnerId = '00G28000000ZPDu'; 
+    	               cs.Reason = 'Address Did Not Verify'; 
+    	               cs.Priority = 'High';
+    	               cs.Status = 'New'; 
+    	               cs.Subject= cs.Account.Name + ' ' + cs.Type;
+    	               cs.Open_Sales_Order__c= T.SalesHeader__r.Name;
+    	               cs.Transaction_Status__c=T.Transaction_Status__c;
+    	               cs.Sales_Order_Name__c= T.SalesHeader__r.Id;
+    	               System.debug(cs);
+                       CList.add(cs);  
+	     }
+	     else
+	       System.debug('error');
+	     }
+	     }
+	}
+	if(stopFlag ==true)
+	   stopFlag=false;
+	   insert CList;
+	}	
+
+}

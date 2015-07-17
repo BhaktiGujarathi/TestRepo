@@ -1,0 +1,16 @@
+public with sharing class DefaultTriggerHandler 
+{
+   public static void Triggerque1(List<Account> Alist)
+   {
+   	   Account acc = new Account();
+   	   for(Account a :  Trigger.new)
+   	   {
+   	   	   acc.name= a.name;
+   	   	   acc.Type = a.Type;
+   	   	   acc.Industry= a.Industry;
+   	   	   acc.AccountNumber = a.AccountNumber;
+   	   	   System.debug('The Clone is' +acc);
+   	   }
+   	   
+   }
+}

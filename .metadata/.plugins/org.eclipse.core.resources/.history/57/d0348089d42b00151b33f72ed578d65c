@@ -1,0 +1,17 @@
+trigger CreateCaseOnInsertionOfTransaction on EFT_Transaction_Status__c (after insert) 
+{
+    if(Trigger.isafter && Trigger.isinsert)
+    for(EFT_Transaction_Status__c T : Trigger.new)
+    { 
+    	 if(EFT_Transaction_Status__c.Method__c == 'Credit Card Address Verify' )
+    	 {
+    	 if(EFT_Transaction_Status__c.Transaction_Status__c == 'Declined')
+    	 {
+    	     if(SalesHeader__c.Status__c == 'Open' )	
+    	     {
+    	     }
+    	     
+    	 }
+    	 }
+    }
+}

@@ -1,0 +1,3 @@
+trigger Que3OnAccount on Account (after insert) {
+
+}

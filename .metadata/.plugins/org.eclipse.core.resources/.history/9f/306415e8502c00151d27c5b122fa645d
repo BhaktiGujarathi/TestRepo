@@ -1,0 +1,11 @@
+public with sharing class Que5HandlerClass {
+	public static boolean stopFlag = true;
+	public static void createCase(List<EFT_Transaction_Status__c> EFTList){
+		Set<id> EFTIds = new Set<id>();
+		for(EFT_Transaction_Status__c Tset : EFTList)
+		{
+			 EFTIds.add(T.id);
+		}
+		system.debug(EFTIds);
+	}
+}

@@ -1,0 +1,12 @@
+public with sharing class DefaultTriggerHandler 
+{
+   public static void Triggerque1(List<account> Alist)
+   {
+   	   for(account a :  Alist)
+   	   {
+   	   	  account accClone = a.clone(false, false,false,false);
+   	   	  
+   	   }   	   
+   }
+}
+ 
